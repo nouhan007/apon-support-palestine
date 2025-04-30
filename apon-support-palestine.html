@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apon Jewellers Supports Palestine</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background-color: #006400;  /* Green for support theme */
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      color: #fff;
+    }
+    .banner {
+      margin-top: 1rem;
+    }
+    .banner img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .donation-box {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    input, button {
+      width: 100%;
+      padding: 1.2rem;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+    input {
+      background-color: #f1f1f1;
+      border: 2px solid #ddd;
+      color: #333;
+    }
+    button {
+      background-color: #006400; /* Dark green */
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #004d00; /* Darker green */
+    }
+    .total-display {
+      font-size: 2rem;
+      margin: 2rem 0;
+      color: #006400;
+    }
+    .qr-code img {
+      width: 150px;
+      margin-top: 1rem;
+    }
+    .facebook-link, .tiktok-link, .youtube-link {
+      margin-top: 2rem;
+    }
+    .facebook-link a, .tiktok-link a, .youtube-link a {
+      display: inline-block;
+      background-color: #3b5998; /* Facebook color */
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    .facebook-link a:hover, .tiktok-link a:hover, .youtube-link a:hover {
+      background-color: #2d4373; /* Darker Facebook color */
+    }
+    .contact-info {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+    .contact-info a {
+      color: #006400;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Apon Jewellers Supports Palestine</h1>
+  </header>
+  <div class="banner">
+    <img src="https://wallpapers.com/images/hd/palestine-background-1ewxgl71jnpkdq6s.jpg" alt="Palestine">
+  </div>
+  <div class="container">
+    <div class="donation-box">
+      <form id="donation-form">
+        <label for="amount">Enter Donation (৳):</label>
+        <input type="number" id="amount" placeholder="e.g. 200" required />
+        <button type="submit">Add Donation</button>
+      </form>
+      <div class="total-display">
+        Total Donated: ৳<span id="total">0</span>
+      </div>
+      <button onclick="resetTotal()">Reset All</button>
+      <div class="qr-code">
+        <p>Scan & Share:</p>
+        <img src="qr-code.png" alt="QR Code" />
+      </div>
+    </div>
+    <div class="facebook-link">
+      <a href="https://www.facebook.com/yourpage" target="_blank">Follow Us on Facebook</a>
+    </div>
+    <div class="tiktok-link">
+      <a href="https://www.tiktok.com/@mohammad.tanvir85" target="_blank">Follow Us on TikTok</a>
+    </div>
+    <div class="youtube-link">
+      <a href="https://youtube.com/@mohammadtanvir-qp9zz?si=C78iN3cTw-SFklb_" target="_blank">Subscribe to Our YouTube Channel</a>
+    </div>
+    <div class="contact-info">
+      <p>Have any questions? Contact us via email: <a href="mailto:kishorgonjaponjewelers@gmail.com">kishorgonjaponjewelers@gmail.com</a></p>
+      <p>Or call us at: <a href="tel:+8801711675872">01711-675872</a></p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('donation-form');
+    const amountInput = document.getElementById('amount');
+    const totalDisplay = document.getElementById('total');
+
+    let total = parseFloat(localStorage.getItem('donationTotal')) || 0;
+    totalDisplay.textContent = total.toFixed(2);
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const amount = parseFloat(amountInput.value);
+      if (!isNaN(amount) && amount > 0) {
+        total += amount;
+        totalDisplay.textContent = total.toFixed(2);
+        localStorage.setItem('donationTotal', total);
+        amountInput.value = '';
+      }
+    });
+
+    function resetTotal() {
+      const confirmReset = confirm("Are you sure you want to reset the total donation to 0?");
+      if (confirmReset) {
+        total = 0;
+        totalDisplay.textContent = total.toFixed(2);
+        localStorage.setItem('donationTotal', total);
+      }
+    }
+  </script>
+</body>
+</html>
